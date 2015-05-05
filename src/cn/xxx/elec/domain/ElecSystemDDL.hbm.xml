@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.xxx.elec.domain.ElecSystemDDL" table="Elec_SystemDDL">
+	<id name="seqID" type="integer">
+		<column name="seqID" not-null="true"></column>
+		<generator class="identity"></generator>
+	</id>
+	<property name="keyWord" type="string">
+		<column name="Keyword" sql-type="varchar(20)" not-null="true"></column>
+	</property>
+	<property name="ddlCode" type="integer">
+		<column name="DdlCode" not-null="true"></column>
+	</property>
+	<property name="ddlName" type="string">
+		<column name="DdlName" sql-type="varchar(50)" not-null="true"></column>
+	</property>
+	</class>
+</hibernate-mapping>

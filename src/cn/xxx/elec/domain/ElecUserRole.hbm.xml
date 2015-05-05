@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.xxx.elec.domain.ElecUserRole" table="elec_user_role">
+		<id name="seqID" type="int">
+			<column name="seqID" ></column>
+			<generator class="increment"></generator>
+		</id>
+		<property name="userID" type="string">
+			<column name="userID"></column>
+		</property>	
+		<property name="roleID" type="string">
+			<column name="roleID"></column>
+		</property>
+		<property name="remark" type="string">
+			<column name="remark"></column>
+		</property>
+	</class>
+</hibernate-mapping>
