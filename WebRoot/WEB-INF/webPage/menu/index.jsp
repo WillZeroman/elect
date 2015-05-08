@@ -1,4 +1,4 @@
-<%@ page language="java"  pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.net.URLDecoder" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
@@ -36,8 +36,39 @@ function check(){
 			theForm.password.focus();
 			return false;
 	    }
+	if(Trim(theForm.checkNumber.value)==""){
+			alert("验证码不能为空");
+			theForm.checkNumber.focus();
+			return false;
+	    }
+}
+function changeImage(){
+	var checkNumberImage = document.getElementById("checkImageNumber");
+	checkNumberImage.src ="${pageContext.request.contextPath}/image.jsp?timeStamp=" + new Date().getTime();
+
 }
 </SCRIPT>
+<%
+
+   String name="";
+   String password="";
+   String checked="";
+   Cookie[] cookies=request.getCookies();
+   if(cookies!=null&&cookies.length>0){
+	   for(int i=0;i<cookies.length;i++){
+		   Cookie cookie=cookies[i];
+		   if("name".equals(cookie.getName())){
+			   name=URLDecoder.decode(cookie.getValue(),"utf-8");
+			   System.out.println("name="+name);
+			   checked="checked";
+		   }
+		   if("password".equals(cookie.getName())){
+			   password=cookie.getValue();
+		   }
+	   }
+   }
+		 
+ %>
 <STYLE type=text/css>
 BODY { margin: 0px; }
 FORM {
@@ -75,21 +106,36 @@ FORM {
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/yonghu.gif" width="84" height="20"></td>
 									<td>
-									<input type="text" name="name" style="width: 100 px" value=""  maxlength="25">
+									<input type="text" name="name" style="width: 100 px" value="<%=name%>"  maxlength="25">
 									</td>
 	
 								</tr>
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/mima.gif" width="84" height="20"></td>
 									<td>
-									<input type="password" name="password" style="width: 100 px" value=""  maxlength="25">
+									<input type="password" name="password" style="width: 100 px" value="<%=password%>"  maxlength="25">
 									</td>
 									
 								</tr>
 								<tr>
-									<td width="100"></td>
-									<td width="100"><input type="submit" class=btn_mouseout onmouseover="this.className='btn_mouseover'" onmouseout="this.className='btn_mouseout'" value="登   录" name="huifubtn"></td>
-
+									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/check.jpg" width="84" height="20"></td>
+									<td>
+									<input type="text" name="checkNumber" id="checkNumber" style="width: 40px" value=""  maxlength="4">
+									<img alt="" src="${pageContext.request.contextPath}/image.jsp" id="checkImageNumber" name="checkImageNumber" height="20" style="cursor:hand" title="点击切换图片" onclick="changeImage()">
+									</td>
+									
+								</tr>
+								<tr>
+									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/remeber.jpg" width="84" height="20"></td>
+									<td>
+									<input type="checkbox" id="rememberMe" name="rememberMe" height="20" value="yes" <%=checked%>>
+									</td>							
+								</tr>
+								<tr>								   							    
+										<td width="100"></td>
+										<td width="100">
+										<input type="submit" class=btn_mouseout onmouseover="this.className='btn_mouseover'" onmouseout="this.className='btn_mouseout'" value="登   录" name="huifubtn">
+										</td>																
 								</tr>
 							</table>
 						</td>

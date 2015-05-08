@@ -23,7 +23,7 @@ function exitsys(){
 </HEAD>
 
 <FRAMESET border=0 frameSpacing=0 rows=82,* frameBorder=0 id="mainparent">
-	<FRAME name=topFrame src="system/elecMenuAction_title.do" noResize scrolling=no>
+	<FRAME name=topFrame src="${pageContext.request.contextPath}/system/elecMenuAction_title.do" noResize scrolling=no>
 <FRAMESET name="main" border=0 frameSpacing=0 frameBorder=0 cols=143,1%,*>
 	<FRAME name="leftFrame" src="${pageContext.request.contextPath}/system/elecMenuAction_left.do" noResize>
 	<frame name="changeButton" src="${pageContext.request.contextPath}/system/elecMenuAction_change1.do" frameBorder=0 marginHeight=0 marginWidth=0 scrolling=no noresize>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="elect"
+  name="elect_04"
   id="myeclipse.1418203658350"
   context-root="/elect"
   j2ee-spec="6.0"
-  archive="elect.war">
+  archive="elect_04.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

@@ -59,7 +59,7 @@ public class CheckLoginName extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		String loginName = request.getParameter("loginName");
-		System.out.println(loginName);
+		//System.out.println(loginName);
 		PrintWriter out = response.getWriter();
 		/*
 		 * loginFlag 表示数据库中是否有loginName
