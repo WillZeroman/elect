@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import cn.xxx.elec.domain.ElecUser;
 import cn.xxx.elec.service.ElecCommonMsgService;
+import cn.xxx.elec.service.ElecLogService;
 import cn.xxx.elec.service.ElecUserService;
 import cn.xxx.elec.util.LoginUtils;
 import cn.xxx.elec.util.MD5keyBean;
@@ -33,10 +34,18 @@ public class ElecMenuAction extends BaseAction implements ModelDriven<UserForm>,
 	private UserForm userForm = new UserForm();
 	private ElecCommonMsgService ecms;
 	private ElecUserService elecUserService;
+	private ElecLogService elecLogService;
 	private HttpServletResponse response;
 	private Log log = LogFactory.getLog(ElecMenuAction.class);
 	
 	
+	public ElecLogService getElecLogService() {
+		return elecLogService;
+	}
+	@Resource(name=ElecLogService.SERVICE_NAME)
+	public void setElecLogService(ElecLogService elecLogService) {
+		this.elecLogService = elecLogService;
+	}
 	public ElecUserService getElecUserService() {
 		return elecUserService;
 	}
@@ -118,7 +127,7 @@ public class ElecMenuAction extends BaseAction implements ModelDriven<UserForm>,
 		
 		//2015-5-8 添加日志管理模块维护系统安全
 		log.info("用户： " + elecUser.getUserName()+" 登陆系统！" + " 时间：" +new Date());
-		
+		elecLogService.saveElecLog(ServletActionContext.getRequest(),"用户： " + elecUser.getUserName()+" 登陆系统！");
 		//end
 		return "home";
 	}

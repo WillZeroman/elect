@@ -57,6 +57,11 @@
     			<param name="namespace">/system</param>
     		</result>
     	</action>
+    	
+    	<!-- 日志管理 -->
+    	<action name="elecLogAction_*" class="cn.xxx.elec.web.action.ElecLogAction" method="{1}">
+    		<result name="home">/WEB-INF/webPage/system/logIndex.jsp</result>
+    	</action>
 	</package>
 
 </struts>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.xxx.elec.domain.ElecLog" table="elec_log">
+	<id name="logID" type="string">
+		<column name="LogID" ></column>
+		<generator class="uuid"></generator>
+	</id>
+	<property name="ipAddress" type="string">
+		<column name="IpAddress"></column>
+	</property>	
+	<property name="opeName" type="string">
+		<column name="OpeName"></column>
+	</property>
+	<property name="opeTime" type="date">
+		<column name="OpeTime" sql-type="datetime"></column>
+	</property>
+	<property name="details" type="string">
+		<column name="Details"></column>
+	</property>
+	</class>
+</hibernate-mapping>

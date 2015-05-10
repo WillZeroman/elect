@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Component;
 
+import cn.xxx.elec.service.ElecLogService;
 import cn.xxx.elec.service.ElecSystemDDLService;
 import cn.xxx.elec.service.ElecUserService;
 import cn.xxx.elec.web.vo.ElecSystemDDLForm;
@@ -24,7 +26,16 @@ public class ElecUserAction extends BaseAction implements ModelDriven<ElecUserFo
 	private ElecUserService eus;
 	private ElecSystemDDLService esds;
 	private ElecUserForm elecUserForm = new ElecUserForm();
+	private ElecLogService elecLogService;
 	
+
+	public ElecLogService getElecLogService() {
+		return elecLogService;
+	}
+	@Resource(name=ElecLogService.SERVICE_NAME)
+	public void setElecLogService(ElecLogService elecLogService) {
+		this.elecLogService = elecLogService;
+	}
 
 	public ElecUserService getEus() {
 		return eus;
@@ -97,9 +108,15 @@ public class ElecUserAction extends BaseAction implements ModelDriven<ElecUserFo
 	* @Return: String 值为save
 	*/
 	public String save(){
-		//System.out.println("save----");
-		System.out.println(elecUserForm);
 		eus.saveUser(elecUserForm);
+		//2015-5-10 将用户的新增和修改信息添加到日志管理中
+		if(elecUserForm.getUserID()!=null && !elecUserForm.getUserID().equals("")){
+			elecLogService.saveElecLog(ServletActionContext.getRequest(), "用户管理，修改当前用户【" +elecUserForm.getUserName()+"】的信息");
+		}
+		else{
+			elecLogService.saveElecLog(ServletActionContext.getRequest(), "用户管理，新增用户【" +elecUserForm.getUserName()+"】的信息");
+
+		}
 		return "save";
 	}
 	
