@@ -1,6 +1,5 @@
-
 <%@ page language="java" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="s" uri="/struts-tags" %>
  <script language="javascript"> 
   function checkchar(){
   	document.Form1.action="system/logAction_main.do";
@@ -12,7 +11,7 @@
   		return;
   	}
   	else{
-  		document.Form2.action="system/logAction_delete.do";
+  		document.Form2.action="system/elecLogAction_delete.do";
   		document.Form2.submit();
   	}
   }
@@ -26,7 +25,7 @@
 	</HEAD>
 		
 	<body >
-		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/system/logAction_main.do" method="post" style="margin:0px;"> 
+		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/system/elecLogAction_home.do" method="post" cssStyle="margin:0px;"> 
 			<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 				<TR height=10><td></td></TR>
 				<tr>
@@ -39,13 +38,12 @@
 					<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 					操作人：</td>
 					<td class="ta_01" >
-					
-					<input type="text" name="opeName" value="" id="opeName" style="width:140px"/>
+				<input type="text" name="opeName" value="" id="opeName" cssStyle="width:140px"/>
 					</td>
 				</tr>
 		    </table>	
 		</form>
-		<form id="Form2" name="Form2" action="${pageContext.request.contextPath }/system/logAction_main.do" method="post">
+		<form id="Form2" name="Form2" action="${pageContext.request.contextPath }/system/elecLogAction_delete.do" method="post">
 		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<TBODY>
 				<TR height=10><td></td></TR>			
@@ -80,89 +78,28 @@
 								<td align="center" width="25%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</td>
 							</tr>
 							
-							
-								
+							<s:if test="#request.ElecLogList!=null">
+								<s:iterator value="#request.ElecLogList" var="log">			
 									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<input type="hidden" name="logid" value="ff80808132e8ceec0132e8d0214f0002" id="logid"/>
+										<!-- 字符串数组 -->
+										<input type="hidden" name="logid" value='<s:property value="%{#log.logID}"/>' id="logid"/>
+										<!-- 字符串以逗号隔开 -->
+										<s:hidden id="logID" name="logID"></s:hidden>
 										<td style="HEIGHT:22px" align="center" width="25%">
-											&#36229;&#32423;&#31649;&#29702;&#21592;
+											<s:property value="%{#log.opeName}"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="25%">
-											127.0.0.1
+											<s:property value="%{#log.ipAddress}"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="25%">
-											2011-10-09
+											<s:property value="%{#log.opeTime}"/>
 										</td>									
 										<td style="HEIGHT:22px" align="center" width="25%">
-											&#26032;&#22686;&#29992;&#25143;&#36213;&#29577;&#30000;
+											<s:property value="#log.details"/>
 										</td>
 									</tr>
-									
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<input type="hidden" name="logid" value="ff80808132e8ceec0132e8d09d350003" id="logid"/>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#36229;&#32423;&#31649;&#29702;&#21592;
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											127.0.0.1
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											2011-10-09
-										</td>									
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#20462;&#25913;&#29992;&#25143;&#30000;&#19971;
-										</td>
-									</tr>
-									
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<input type="hidden" name="logid" value="ff80808132e8ceec0132e8d0fdd40004" id="logid"/>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#36229;&#32423;&#31649;&#29702;&#21592;
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											127.0.0.1
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											2011-10-09
-										</td>									
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#21024;&#38500;&#29992;&#25143;null
-										</td>
-									</tr>
-									
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<input type="hidden" name="logid" value="ff80808132e8ceec0132e8d3c5dd0006" id="logid"/>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#36229;&#32423;&#31649;&#29702;&#21592;
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											127.0.0.1
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											2011-10-09
-										</td>									
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#26032;&#22686;&#29992;&#25143;&#30475;&#30475;
-										</td>
-									</tr>
-									
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<input type="hidden" name="logid" value="ff80808132e8ceec0132e8d3df310007" id="logid"/>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#36229;&#32423;&#31649;&#29702;&#21592;
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											127.0.0.1
-										</td>
-										<td style="HEIGHT:22px" align="center" width="25%">
-											2011-10-09
-										</td>									
-										<td style="HEIGHT:22px" align="center" width="25%">
-											&#21024;&#38500;&#29992;&#25143;&#30475;&#30475;
-										</td>
-									</tr>
-									
-								
+								</s:iterator>
+							</s:if>
 						</table>					
 						
 					</td>

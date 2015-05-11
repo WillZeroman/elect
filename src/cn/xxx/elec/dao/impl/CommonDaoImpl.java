@@ -72,14 +72,14 @@ public class CommonDaoImpl<T> implements CommonDao<T> {
 	*/
 	@Override
 	public void deleteObjectByIDs(Serializable... ids) {
-		this.getSession().beginTransaction();
+		//this.getSession().beginTransaction();
 		for(int i=0;ids!=null && i<ids.length;i++)
 		{
 			Serializable id = ids[i];
 			Object o = (Object)this.getSession().get(entity, id);
 			this.getSession().delete(o);
 		}		
-		this.getSession().getTransaction().commit();
+		//this.getSession().getTransaction().commit();
 		
 	}
 	/**  

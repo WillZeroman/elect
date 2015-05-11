@@ -8,6 +8,15 @@ public class ElecLogForm {
 	private String opeName;
 	private String opeTime;
 	private String details;
+	//保存待删除的日志id集合
+	private String[] logid;
+	
+	public String[] getLogid() {
+		return logid;
+	}
+	public void setLogid(String[] logid) {
+		this.logid = logid;
+	}
 	public String getLogID() {
 		return logID;
 	}

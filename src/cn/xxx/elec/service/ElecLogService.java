@@ -18,4 +18,6 @@ public interface ElecLogService {
 	void saveElecLog(HttpServletRequest request, String details);
 
 	List<ElecLogForm> findElecLogList(ElecLogForm elecLogForm);
+
+	void deleteElecLogByLogIDs(ElecLogForm elecLogForm);
 }

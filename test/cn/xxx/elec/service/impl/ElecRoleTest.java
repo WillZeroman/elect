@@ -18,7 +18,7 @@ public class ElecRoleTest {
 	
 	@Before
 	public void before(){
-		atx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//atx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
 	
 	@Test
@@ -49,8 +49,12 @@ public class ElecRoleTest {
 	}
 	@Test
 	public void testA(){
+		String s = "f9b1eb324d41c17b014d41c1e5190000, f9b1eb324d41c17b014d41c479bf0001, 402881ef4d3d4ee3014d3d4f28be0000, 402881ef4d3d5960014d3d5a8c960000, 402881ef4d3d5960014d3d5b55ad0002, 402881ef4d3d5960014d3de1e0710003";
 		
-		System.out.println();
+		String[] ids = s.trim().split(",");
+		for(int i=0;i<ids.length;i++){
+			System.out.println(ids[i]);
+		}
 	}
 	
 }

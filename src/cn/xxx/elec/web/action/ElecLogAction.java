@@ -41,6 +41,20 @@ public class ElecLogAction extends BaseAction implements
 	*/
 	public String home(){
 		List<ElecLogForm> list = elecLogService.findElecLogList(elecLogForm);
+		request.put("ElecLogList", list);
 		return "home";
+	}
+	/**  
+	* @Name: delete
+	* @Description: 删除所有的日志信息
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-5-11 （创建日期）
+	* @Parameters: 
+	* @Return: String "delete" 
+	*/
+	public String delete(){
+		elecLogService.deleteElecLogByLogIDs(elecLogForm);
+		return "delete";
 	}
 }

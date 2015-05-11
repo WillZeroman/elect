@@ -65,9 +65,9 @@ public class ElecLogServiceImpl implements ElecLogService {
 	public List<ElecLogForm> findElecLogList(ElecLogForm elecLogForm) {
 		String hqlWhere = "";
 		List<String> paramsList = new ArrayList<String>();
-		if(elecLogForm!=null && elecLogForm.getOpeName()!=null && elecLogForm.getOpeTime()!=null){
+		if(elecLogForm!=null && elecLogForm.getOpeName()!=null && !elecLogForm.getOpeName().equals("")){
 			hqlWhere += " and o.opeName like ?";
-			paramsList.add(elecLogForm.getOpeName());
+			paramsList.add("%" + elecLogForm.getOpeName() + "%");
 		}
 		Object[] params = paramsList.toArray();
 		LinkedHashMap<String, String> orderBy = new LinkedHashMap<String, String>();
@@ -100,6 +100,20 @@ public class ElecLogServiceImpl implements ElecLogService {
 			listVO.add(elecLogForm);
 		}
 		return listVO;
+	}
+	
+	@Transactional(readOnly=false)
+	public void deleteElecLogByLogIDs(ElecLogForm elecLogForm) {
+		//第一种方法：
+		String[] ids = elecLogForm.getLogid();
+		elecLogDao.deleteObjectByIDs(ids);	
+		//第二种方法：
+		/*String id = elecLogForm.getLogID();
+		String[] ids = id.split(",");
+		for(int i=0;i<ids.length;i++){
+			ids[i] = ids[i].trim();
+		}
+		elecLogDao.deleteObjectByIDs(ids);*/
 	}
 	
 }

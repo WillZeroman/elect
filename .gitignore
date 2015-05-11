@@ -43,3 +43,4 @@ Temporary Items
 .apdisk
 WebRoot/WEB-INF/classes/cn/xxx/elec/util/LoginUtils.class
 *.class
+*.class
