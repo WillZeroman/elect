@@ -1,6 +1,10 @@
 package cn.xxx.elec.web.action;
 
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,12 +15,11 @@ import org.springframework.stereotype.Component;
 import cn.xxx.elec.service.ElecLogService;
 import cn.xxx.elec.service.ElecSystemDDLService;
 import cn.xxx.elec.service.ElecUserService;
+import cn.xxx.elec.util.ExcelFileGenerator;
 import cn.xxx.elec.web.vo.ElecSystemDDLForm;
 import cn.xxx.elec.web.vo.ElecUserForm;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.util.ValueStack;
 
 
 @Component("elecUserAction_*")
@@ -153,4 +156,68 @@ public class ElecUserAction extends BaseAction implements ModelDriven<ElecUserFo
 		eus.deleteElecUser(elecUserForm);
 		return "save";
 	}
+	
+	/**  
+	* @Name: export
+	* @Description: 导出excel报表
+	* @Author: wei
+	* @Version: V1.00 
+	* @Create Date: 2015-05-11
+	* @Parameters: 
+	* @Return: 
+	*/
+	public String export(){
+		//获取excel的表头
+		ArrayList fieldName = eus.getExcelFiledNameList(); 
+		  //获取excel数据
+		ArrayList fieldData = eus.getExcelFiledDataList(elecUserForm);
+
+		try {
+			OutputStream out = ServletActionContext.getResponse().getOutputStream();
+			ServletActionContext.getResponse().reset();
+			ServletActionContext.getResponse().setContentType("application/vnd.ms-excel");
+			ExcelFileGenerator generator = new ExcelFileGenerator(fieldName, fieldData);
+			generator.expordExcel(out);
+			//
+			System.setOut(new PrintStream(out));
+			out.flush();
+			if(out!=null){
+				out.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	/**  
+	* @Name: userImport
+	* @Description: 跳转到userImport.jsp
+	* @Author: wei
+	* @Version: V1.00 
+	* @Create Date: 2015-06-15
+	* @Parameters: 
+	* @Return: 
+	*/
+	public String userImport(){
+		return "userImport";
+	}
+	/**  
+	* @Name: Importdata
+	* @Description: 导入excel报表,并刷新userIndex页面
+	* @Author: wei
+	* @Version: V1.00 
+	* @Create Date: 2015-06-04
+	* @Parameters: 
+	* @Return: 
+	*/
+	public String Importdata(){
+		eus.saveElecUserWithExcel(elecUserForm);
+		return "export";
+	}
+	
 }

@@ -100,3 +100,11 @@ elec07
 3) 日志管理 log4j配置
 4) 日志管理的查询 
 5） 日志管理的删除（返回到后台是id数组和id字符串两种情况）
+
+elec08
+1)分页（未实现）
+2）excel到处数据 **抽出一个util类
+3) %**% POI处理office word excel 功能
+4) jxl导入excel功能
+
+

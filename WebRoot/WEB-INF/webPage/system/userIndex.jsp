@@ -7,6 +7,11 @@
   	document.Form1.action="system/userAction_main.do";
   	document.Form1.submit();
   }
+  function exportExcel(){
+  	var userName= document.getElementById("userName").value;
+  	var path = "system/elecUserAction_export.do?userName="+userName;
+  	openWindow(path,'700','400');
+  }
 
   </script>
 
@@ -58,7 +63,11 @@
 					    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="查询" name="BT_find" 
 						 onclick="document.forms[0].submit()">&nbsp;&nbsp;
 						<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加用户" name="BT_Add" 
-						 onclick="openWindow('system/elecUserAction_userAdd.do','700','400')">
+						 onclick="openWindow('system/elecUserAction_userAdd.do','700','400')">&nbsp;&nbsp;
+						<input style="font-size:12px; color:black; height=20;width=80" id="BT_Export" type="button" value="导出Excel" name="BT_Add" 
+						 onclick="exportExcel()">
+						 <input style="font-size:12px; color:black; height=20;width=80" id="BT_Import" type="button" value="导入Excel" name="BT_Add" 
+						 onclick="openWindow('system/elecUserAction_userImport.do','700','400');">
 					</td>
 				</tr>
 					

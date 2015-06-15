@@ -1,6 +1,8 @@
 package cn.xxx.elec.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import cn.xxx.elec.dao.ElecSystemDDLDao;
 import cn.xxx.elec.dao.ElecUserDao;
 import cn.xxx.elec.domain.ElecUser;
 import cn.xxx.elec.service.ElecUserService;
+import cn.xxx.elec.util.GenerateSqlFromExcel;
 import cn.xxx.elec.util.MD5keyBean;
 import cn.xxx.elec.util.StringHelper;
 import cn.xxx.elec.web.vo.ElecUserForm;
@@ -301,6 +304,99 @@ public class ElecUserServiceImpl implements ElecUserService {
 			}
 		}
 		return ht;
+	}
+	/**  
+	* @Name: getExcelFiledNameList
+	* @Description:
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-5-11 （创建日期）
+	* @Parameters: ArrayList Excel标题集
+	* @Return: 
+	*/
+	@Override
+	public ArrayList getExcelFiledNameList() {
+		String[] titles ={"登录名","用户姓名","性别","联系电话","是否在职"};
+		ArrayList filedName = new ArrayList();
+		for(int i=0;i<titles.length;i++){
+			filedName.add(titles[i]);
+		}
+		return filedName;
+	}
+	/**  
+	* @Name: getExcelFiledDataList
+	* @Description:获取数据
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-5-11 （创建日期）
+	* @Parameters: ArrayList Excel数据集
+	* @Return: 
+	*/
+	@Override
+	public ArrayList getExcelFiledDataList(ElecUserForm elecUserForm) {
+		//查询条件
+		String hqlWhere = "";
+		List<String> paramsList = new ArrayList<String>();
+		if(elecUserForm!=null && elecUserForm.getUserName()!=null && 
+				!elecUserForm.getUserName().equals("")){
+			hqlWhere +=" and o.userName like ?";
+			paramsList.add("%"+elecUserForm.getUserName()+"%");
+		}
+		Object[] params = paramsList.toArray();
+		//排序顺序
+		LinkedHashMap<String, String> orderBy = new LinkedHashMap<String, String>();
+		orderBy.put("o.onDutyDate", "desc");
+		List<ElecUser> list = elecUserDao.findCollectionByNoPage(hqlWhere, params, orderBy);
+		List<ElecUserForm> voList = this.elecUserPOToVO(list);
+		//构造报表导出数据
+		ArrayList fieldList = new ArrayList();
+		for(int i=0;voList!=null && i<voList.size();i++){
+			ArrayList dataList = new ArrayList();
+			ElecUserForm temp = voList.get(i);
+			dataList.add(temp.getLoginName());
+			dataList.add(temp.getUserName());
+			dataList.add(temp.getSexID());
+			dataList.add(temp.getContactTel());
+			dataList.add(temp.getIsDuty());
+			fieldList.add(dataList);
+		}
+		return  fieldList;
+	}
+	/**  
+	* @Name: saveElecUserWithExcel
+	* @Description:从excel中保存用户数据
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-06-04（创建日期）
+	* @Parameters:
+	* @Return: 
+	*/
+	@Transactional(readOnly=false)
+	@Override
+	public void saveElecUserWithExcel(ElecUserForm elecUserForm) {
+		File file = elecUserForm.getFile();
+		GenerateSqlFromExcel generate = new GenerateSqlFromExcel();
+		try {
+			ArrayList<String[]> list = generate.generateStationBugSql(file);
+			ElecUser elecUser = null;
+			MD5keyBean md5 = new MD5keyBean();
+			for(int i=0;list!=null && i<list.size();i++){
+		    	String[] data = list.get(i);
+		    	elecUser = new ElecUser();		    	
+		    	elecUser.setLoginName(data[0].toString());
+		    	elecUser.setLoginPwd(md5.getkeyBeanofStr(data[1]));
+		    	elecUser.setUserName(data[2]);
+		    	elecUser.setSexID(data[3]);
+		    	elecUser.setJctID(data[4]);
+		    	elecUser.setContactTel(data[5]);
+		    	elecUser.setIsDuty(data[6]);
+		    	elecUser.setBirthday(StringHelper.stringConvertDate(data[7]));
+		    	elecUserDao.save(elecUser);
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

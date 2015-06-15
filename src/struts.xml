@@ -46,6 +46,7 @@
     			<param name="actionName">elecUserAction_userIndex.do</param>
     			<param name="namespace">/system</param>
     		</result>
+    		<result name="export">/WEB-INF/webPage/system/userIndex.jsp</result>    		
     		<result name="{1}">/WEB-INF/webPage/system/{1}.jsp</result>		 
     	</action>
     		<!-- 角色管理 -->

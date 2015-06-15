@@ -1,6 +1,6 @@
 package cn.xxx.elec.web.vo;
 
-import java.util.Date;
+import java.io.File;
 
 public class ElecUserForm {
 
@@ -22,7 +22,14 @@ public class ElecUserForm {
 	private String remark;
 	private boolean flag;
 	private String md5Flag;
-	
+	//jxl报表导入时用
+	private File file;
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
 	public boolean isFlag() {
 		return flag;
 	}

@@ -1,5 +1,6 @@
 package cn.xxx.elec.service;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -24,5 +25,11 @@ public interface ElecUserService {
 	String findPopedomByloginName(String loginName);
 
 	Hashtable<String,String> findRoleNameByLoginName(String loginName);
+
+	ArrayList getExcelFiledNameList();
+
+	ArrayList getExcelFiledDataList(ElecUserForm elecUserForm);
+
+	void saveElecUserWithExcel(ElecUserForm elecUserForm);
 	
 }
