@@ -2,6 +2,8 @@ package cn.xxx.elec.service.impl;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -51,6 +53,13 @@ public class ElecUserTest {
 		ElecUserService eus = (ElecUserService) atx.getBean(ElecUserService.SERVICE_NAME);
 		java.util.Hashtable<String, String> ht = eus.findRoleNameByLoginName("ad");
 		System.out.println(ht);
+	}
+	@Test
+	public void testChart(){
+		ApplicationContext atx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ElecUserService eus = (ElecUserService) atx.getBean(ElecUserService.SERVICE_NAME);
+		List<ElecUserForm> list = eus.findUserByChart();
+		System.out.println(list.get(0).getJctname());
 	}
 	
 }

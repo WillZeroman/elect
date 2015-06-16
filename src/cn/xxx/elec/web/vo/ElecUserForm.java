@@ -22,6 +22,22 @@ public class ElecUserForm {
 	private String remark;
 	private boolean flag;
 	private String md5Flag;
+	//2015-6-16 显示图表时用到	
+	private String jctname;
+	private String jctcount;
+	
+	public String getJctname() {
+		return jctname;
+	}
+	public void setJctname(String jctname) {
+		this.jctname = jctname;
+	}
+	public String getJctcount() {
+		return jctcount;
+	}
+	public void setJctcount(String jctcount) {
+		this.jctcount = jctcount;
+	}
 	//jxl报表导入时用
 	private File file;
 	public File getFile() {

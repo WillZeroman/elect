@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import cn.xxx.elec.service.ElecLogService;
 import cn.xxx.elec.service.ElecSystemDDLService;
 import cn.xxx.elec.service.ElecUserService;
+import cn.xxx.elec.util.ChartUtils;
 import cn.xxx.elec.util.ExcelFileGenerator;
 import cn.xxx.elec.web.vo.ElecSystemDDLForm;
 import cn.xxx.elec.web.vo.ElecUserForm;
@@ -219,5 +220,19 @@ public class ElecUserAction extends BaseAction implements ModelDriven<ElecUserFo
 		eus.saveElecUserWithExcel(elecUserForm);
 		return "export";
 	}
-	
+	/**  
+	* @Name: userReport
+	* @Description: 跳转到userReport.jsp
+	* @Author: wei
+	* @Version: V1.00 
+	* @Create Date: 2015-06-16
+	* @Parameters: 
+	* @Return: 
+	*/
+	public String userReport(){		
+		List<ElecUserForm> list = eus.findUserByChart();
+		String filename = ChartUtils.getUserBarChart(list);
+		request.put("filename", filename);
+		return "userReport";
+	}
 }

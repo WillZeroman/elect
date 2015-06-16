@@ -31,5 +31,7 @@ public interface ElecUserService {
 	ArrayList getExcelFiledDataList(ElecUserForm elecUserForm);
 
 	void saveElecUserWithExcel(ElecUserForm elecUserForm);
+
+	List<ElecUserForm> findUserByChart();
 	
 }

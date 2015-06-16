@@ -11,6 +11,8 @@ public interface ElecUserDao extends CommonDao<ElecUser>{
 
 	List<Object[]> findRoleNameByLoginName(String loginName);
 
+	List<Object[]> findUserByChart();
+
 	
 	
 }

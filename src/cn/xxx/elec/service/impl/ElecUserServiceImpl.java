@@ -388,7 +388,7 @@ public class ElecUserServiceImpl implements ElecUserService {
 		    	elecUser.setUserName(data[2]);
 		    	elecUser.setSexID(data[3]);
 		    	elecUser.setJctID(data[4]);
-		    	elecUser.setContactTel(data[5]);
+		    	elecUser.setAddress(data[5]);
 		    	elecUser.setIsDuty(data[6]);
 		    	elecUser.setBirthday(StringHelper.stringConvertDate(data[7]));
 		    	elecUserDao.save(elecUser);
@@ -397,6 +397,42 @@ public class ElecUserServiceImpl implements ElecUserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	/**  
+	* @Name: findUserByChart
+	* @Description: 使用柱状图生成用户统计信息
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-06-16（创建日期）
+	* @Parameters:
+	* @Return: 
+	*/
+	@Override
+	public List<ElecUserForm> findUserByChart() {
+		List<Object[]> list = elecUserDao.findUserByChart();
+		List<ElecUserForm> listVO = this.userChartPO2VO(list);
+		return listVO;
+	}
+	/**  
+	* @Name: userChartPO2VO
+	* @Description: chart的po转vo对象
+	* @Author: wei（作者）
+	* @Version: V1.00 （版本号）
+	* @Create Date: 2015-06-16（创建日期）
+	* @Parameters: List<Object[]> list
+	* @Return: List<ElecUserForm>
+	*/
+	private List<ElecUserForm> userChartPO2VO(List<Object[]> list) {
+		List<ElecUserForm> res = new ArrayList<ElecUserForm>();
+		ElecUserForm elecUserForm = null;
+		for(int i=0;list!=null && i<list.size();i++){
+			Object[] obs = list.get(i);
+			elecUserForm = new ElecUserForm();
+			elecUserForm.setJctname(obs[0].toString());
+			elecUserForm.setJctcount(obs[1].toString());
+			res.add(elecUserForm);
+		}
+		return res;
 	}
 
 	

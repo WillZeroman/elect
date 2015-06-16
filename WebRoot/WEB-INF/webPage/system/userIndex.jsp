@@ -68,6 +68,10 @@
 						 onclick="exportExcel()">
 						 <input style="font-size:12px; color:black; height=20;width=80" id="BT_Import" type="button" value="导入Excel" name="BT_Add" 
 						 onclick="openWindow('system/elecUserAction_userImport.do','700','400');">
+				   </td>
+					<td class="ta_01" align="right">
+					    <input style="font-size:12px; color:black; height=20;width=80" id="BT_User" type="button" value="人员统计" name="BT_User" 
+						 onclick="openWindow('system/elecUserAction_userReport.do','700','400')">
 					</td>
 				</tr>
 					

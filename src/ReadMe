@@ -107,4 +107,9 @@ elec08
 3) %**% POI处理office word excel 功能
 4) jxl导入excel功能
 
+elec09
+1) jfreechart 绘图 （jfreechartDemo中）
+   java后台利用jfreechart生成一张图，显示到前台（不够优秀）
 
+   %**%了解当前web绘图控件
+***************************************END****************************************************

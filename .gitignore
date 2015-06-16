@@ -44,3 +44,4 @@ Temporary Items
 WebRoot/WEB-INF/classes/cn/xxx/elec/util/LoginUtils.class
 *.class
 *.class
+*.class
